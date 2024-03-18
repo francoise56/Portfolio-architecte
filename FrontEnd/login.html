@@ -28,14 +28,14 @@
     <main>
         <section id="login">
             <h2>Log In</h2>
-            <form action="#" method="post">
+            <form id="loginForm" method="POST">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required>
                 <label for="pass">Mot de passe</label>
                 <input type="password" id="pass" name="password">
                 <input type="submit" value="Se connecter">
             </form>
-            <p>Mot de passe oublié</p>
+            <p><a href="">Mot de passe oublié</a></p>
         </section>
     </main>
 
@@ -48,18 +48,39 @@
     </footer>
 
     <script type="module">
-        //envoie de l'ensemble au click
-        fetch("http://localhost:5678/users/login"),{
+        const loginForm = document.querySelector('#loginForm');
+        const emailInput = document.querySelector('#email');
+        const passwordInput = document.querySelector('#pass');
+
+        loginForm.addEventListener('submit', function(event){
+            event.preventDefault();
+
+            let email = emailInput.value;
+            let pass = passwordInput.value;
+            console.log = email;
+            console.log = pass;
+
+        // obtenir l'authentification
+        fetch("http://localhost:5678/users/login", {
             method: "POST",
             headers:{ "Content-Type": "application/json" },
-            body: 
+            body: JSON.stringify({
+                "email": email,
+                "password": pass,
+            })
+        }).then(function(response){
+            console.log = response;
+        });
+    });
+        
+
+            
                 
             
-        }
+            
 
-        document.querySelector(`form input`).addEventListener("click",function()){
+        //document.querySelector(`form input`).addEventListener("click",function()){
 
-        }
         // vérification des champs de formulaire
 
 
